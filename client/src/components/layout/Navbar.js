@@ -10,7 +10,7 @@ class Navbar extends Component {
             World Party Traveller
           </Link>
           <button
-            className="navbar-toggler"
+            className="navbar-toggler"  
             type="button"
             data-toggle="collapse"
             data-target="#navbarNav"
