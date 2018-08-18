@@ -8,8 +8,10 @@ const Item = require('../../models/Item');
 // @desc Get all items
 router.get('/', (req, res) => {
     Item.find()
-    .sort({date: -1})
-    .then(items => res.json(items))
+        .sort({
+            date: -1
+        })
+        .then(items => res.json(items))
 });
 
 // @route POST api/items
@@ -26,8 +28,12 @@ router.post('/', (req, res) => {
 // @desc Delete an item
 router.delete('/:id', (req, res) => {
     Item.findById(req.params.id)
-        .then(item => item.remove().then(() => res.json({success: true})))
-        .catch(err => res.status(404).json({success: false}))
+        .then(item => item.remove().then(() => res.json({
+            success: true
+        })))
+        .catch(err => res.status(404).json({
+            success: false
+        }))
 });
 
 module.exports = router;
