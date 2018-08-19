@@ -97,8 +97,8 @@ class Pagination extends Component {
     const totalNumbers = (this.pageNeighbours * 2) + 3;
     const totalBlocks = totalNumbers + 2;
 
-    if (totalPages > totalBlocks) {
-
+    if (totalPages >= totalBlocks) {
+      
       const startPage = Math.max(2, currentPage - pageNeighbours);
       const endPage = Math.min(totalPages - 1, currentPage + pageNeighbours);
 
@@ -113,6 +113,7 @@ class Pagination extends Component {
       const hasRightSpill = (totalPages - endPage) > 1;
       const spillOffset = totalNumbers - (pages.length + 1);
 
+      
       switch (true) {
         // handle: (1) < {5 6} [7] {8 9} (10)
         case (hasLeftSpill && !hasRightSpill): {
@@ -167,6 +168,7 @@ class Pagination extends Component {
               );
 
               if (page === RIGHT_PAGE) return (
+                
                 <li key={index} className="page-item">
                   <a className="page-link" href="#" aria-label="Next" onClick={this.handleMoveRight}>
                     <span aria-hidden="true">&raquo;</span>

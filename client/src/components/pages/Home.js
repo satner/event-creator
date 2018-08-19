@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CustomCarousel from '../layout/CustomCarousel';
 import DisplayData from '../layout/DisplayData';
 import SearchBar from '../layout/SearchBar';
-import footerImage from '../../images/footer-image.jpg'
+import Footer from '../layout/Footer'
 
 class Home extends Component {
  
@@ -14,7 +14,8 @@ class Home extends Component {
         <h1 id="main-header" className="display-4 text-center" >Active Experiences</h1>
         
         <DisplayData />
-        <img id="bot-image" src={footerImage}/>
+        
+        <Footer />
       </div>
     );
   }
