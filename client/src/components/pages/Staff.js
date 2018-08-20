@@ -55,7 +55,7 @@ class Staff extends Component {
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
-            <CreateTrip />
+            <CreateTrip username={currentUserName} email={currentUserEmail}/>
           </TabPane>
           <TabPane tabId="2">
           <p> KAPPA REALITY</p>
