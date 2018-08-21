@@ -18,7 +18,19 @@ router.get('/', (req, res) => {
 // @desc Create an item
 router.post('/', (req, res) => {
     const newItem = new Item({
-        name: req.body.name
+        name: req.body.name,
+        email: req.body.email,
+        duration: req.body.duration,
+        "total-participation": req.body["total-participation"],
+        price: req.body.price,
+        "date-start": req.body["date-start"],
+        "date-end":req.body["date-end"],
+        "contact-phone": req.body["contact-phone"],
+        hotel: req.body.hotel,
+        description: req.body.description,
+        extras: req.body.extras,
+        mustHave: req.body.mustHave,
+        activities: req.body.activities
     });
 
     newItem.save().then(item => res.json(item));

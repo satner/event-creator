@@ -1,27 +1,39 @@
 import React from 'react';
-import { AvForm, AvField, AvGroup, AvInput, AvFeedback, AvRadioGroup, AvRadio } from 'availity-reactstrap-validation';
-import { CustomInput, Button, Form, FormGroup, Label, Input, FormText,InputGroup,
-  InputGroupAddon, FormFeedback, Collapse, Alert } from 'reactstrap';
+import { AvForm, AvField} from 'availity-reactstrap-validation';
+import { Button, FormGroup, Label, Input, Collapse, Alert } from 'reactstrap';
 
 export default class Example extends React.Component {
   constructor(props) {
     super(props);
 
     this.handleSubmitSchedule = this.handleSubmitSchedule.bind(this);
+    this.toggleSaveTrip = this.toggleSaveTrip.bind(this);
     this.toggleSchedule = this.toggleSchedule.bind(this);
     this.toggleMain = this.toggleMain.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       collapseMain: true,
       collapseSchedule: false,
-      schedule: ''
+      CollapseSaveTrip: false,
+      schedule: '',
+      scheduleTable: [],
+      description: '',
+      extras: '',
+      mustHave:'',
+      mainGood: false,
+      allGood: false
       };
   }
 
   handleSubmit(event, errors, values) {
+    values.description = this.state.description
+    values.extras = this.state.extras
+    values.mustHave = this.state.mustHave
+
     this.setState({errors, values});
     if (errors.length === 0) {
       this.setState({ collapseMain: !this.state.collapseMain });
+      this.setState({mainGood: true});
       this.toggleSchedule();
     }
   }
@@ -29,7 +41,13 @@ export default class Example extends React.Component {
   handleSubmitSchedule(event, errors, values) {
     if (errors.length === 0) {
       this.setState({schedule: values});
+      this.setState(function(oldState) {
+        scheduleTable: oldState.scheduleTable.push(this.state.schedule)
+      });
+      this.state.mainGood ? this.setState({allGood: true}) : ''
     }
+      this.setState({ collapseSchedule: !this.state.collapseSchedule });
+      this.toggleSaveTrip();
   }
 
   toggleMain() {
@@ -38,6 +56,10 @@ export default class Example extends React.Component {
 
   toggleSchedule() {
     this.setState({ collapseSchedule: !this.state.collapseSchedule });
+  }
+
+  toggleSaveTrip() {
+    this.setState({ CollapseSaveTrip: !this.state.CollapseSaveTrip });
   }
 
   createSchedule = (duration) => {
@@ -56,8 +78,23 @@ export default class Example extends React.Component {
         </div>
       )
     }
-
     return table
+  }
+
+  kappa = (data) => {
+    fetch('/api/items', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: data
+    })
+  }
+
+  saveTrip = () => {
+    this.state.values.activities = this.state.scheduleTable
+    this.kappa(JSON.stringify(this.state.values))
   }
 
   render() {
@@ -83,15 +120,15 @@ export default class Example extends React.Component {
             <AvField name="hotel" label="Hotel Name" required />
             <FormGroup>
               <Label for="exampleText">Description</Label>
-              <Input type="textarea" name="description" id="exampleText" required/>
+              <Input type="textarea" name="description" id="exampleText" onKeyUp={(e) => this.setState({description: e.target.value})} required/>
             </FormGroup>
             <FormGroup>
               <Label for="exampleText">Extras</Label>
-              <Input type="textarea" name="extras" id="exampleText" />
+              <Input type="textarea" name="extras" id="exampleText" onKeyUp={(e) => this.setState({extras: e.target.value})}/>
             </FormGroup>
             <FormGroup>
               <Label for="exampleText">Must have</Label>
-              <Input type="textarea" name="must-have" id="exampleText" />
+              <Input type="textarea" name="must-have" id="exampleText" onKeyUp={(e) => this.setState({mustHave: e.target.value})}/>
             </FormGroup>
             <FormGroup>
               <Button>Next</Button>
@@ -103,7 +140,7 @@ export default class Example extends React.Component {
 
 
         {/* Create Schedule of trip */}
-        <Alert color="dark" onClick={this.toggleSchedule} style={{ marginTop: '25px'}}>Main content of trip</Alert>
+        <Alert color="dark" onClick={this.toggleSchedule} style={{ marginTop: '25px'}}>Schedule</Alert>
         <Collapse isOpen={this.state.collapseSchedule}>
           <AvForm onSubmit={this.handleSubmitSchedule} style={{marginTop: "25px", display: "flex", flexWrap: "wrap", justifyContent: "flex-start"}}>
           {this.state.values && this.state.values.duration &&
@@ -114,13 +151,18 @@ export default class Example extends React.Component {
             </FormGroup>
           </AvForm>
         </Collapse>
-            {console.log('qqqqqqqqqqq',this.state.schedule)}
+            
         
         {/* {this.state.values && <div>
           <h5>Submission values</h5>
           Invalid: {this.state.errors.join(', ')}<br />
           Values: <pre>{JSON.stringify(this.state.values, null, 2)}</pre>
         </div>} */}
+
+      <Alert color="dark" onClick={this.toggleSaveTrip} style={{ marginTop: '25px'}}>Save trip</Alert>
+      <Collapse isOpen={this.state.CollapseSaveTrip}>
+        <Button disabled={!this.state.allGood} onClick={this.saveTrip} >Save trip</Button>
+      </Collapse>
 
       </div>
     );

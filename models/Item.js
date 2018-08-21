@@ -7,6 +7,54 @@ const ItemSchema = new Schema({
         type: String,
         required: true
     }, 
+    email: {
+        type: String,
+        
+    },
+    duration: {
+        type: String,
+       
+    },
+    "total-participation": {
+        type: String,
+       
+    },
+    price: {
+        type: String,
+        
+    },
+    "date-start": {
+        type: String,
+       
+    },
+    "date-end": {
+        type: String,
+       
+    },
+    "contact-phone": {
+        type: String,
+       
+    },
+    hotel: {
+        type: String,
+       
+    },
+    description: {
+        type: String,
+        
+    },
+    extras: {
+        type: String,
+        
+    },
+    mustHave: {
+        type: String,
+       
+    },
+    activities: {
+        type: Array,
+       
+    },
     date: {
         type: Date,
         default: Date.now
