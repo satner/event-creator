@@ -40,10 +40,10 @@ class Footer extends Component {
             <hr />
             <p className="footer-company-name">World Party Traveller &copy; 2018</p>
             <div className="footer-icons">
-                <a href="#"><i className="fa fa-facebook"></i></a>
-                <a href="#"><i className="fa fa-twitter"></i></a>
-                <a href="#"><i className="fa fa-linkedin"></i></a>
-                <a href="#"><i className="fa fa-github"></i></a>
+                <a arget="_blank" title="Facebook" href="https://www.facebook.com/worldpartytraveller/"><i className="fa fa-facebook"></i></a>
+                <a target="_blank" title="Youtube" href="http://youtube.com/channel/UCARP5Lr9ojVL8ExgAKhk6Zg"><i className="fa fa-youtube"></i></a>
+                <a target="_blank" title="Instagram" href="http://instagram.com/world_party_traveller"><i className="fa fa-instagram"></i></a>
+                <a target="_blank" title="Pinterest" href="http://pinterest.com/wptraveller"><i className="fa fa-pinterest"></i></a>
             </div>
         </div>
     </div>

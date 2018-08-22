@@ -13,7 +13,6 @@ class DisplayData extends Component {
   }
 
   onPageChanged = data => {
-    const { query } = this.state
     const { allData } = this.state;
     const { currentPage, totalPages, pageLimit } = data;
     const offset = (currentPage - 1) * pageLimit;

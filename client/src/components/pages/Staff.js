@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 import classnames from 'classnames';
 import CreateTrip from '../layout/CreateTrip'
 import TripsTable from '../layout/TripsTable'
@@ -59,7 +59,7 @@ class Staff extends Component {
             <CreateTrip username={currentUserName} email={currentUserEmail}/>
           </TabPane>
           <TabPane tabId="2">
-          <TripsTable />
+          <TripsTable username={currentUserName} email={currentUserEmail}/>
           </TabPane>
         </TabContent>
       </div>
