@@ -127,7 +127,7 @@ export default class Example extends React.Component {
       if(response.status === 200) {
         ToastStore.success("Trip saved!");
       } else {
-        ToastStore.error("Trip saved!");
+        ToastStore.error("Error occurred");
       }
     })
   }
