@@ -329,3 +329,10 @@ border: 0;
 outline: none;
 }
 
+#table-title {
+	font-family:Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	font-size: large;
+	margin-top: 25px;
+	margin-left: 10px;
+	text-emphasis: strong;
+}

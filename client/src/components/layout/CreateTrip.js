@@ -2,6 +2,8 @@ import React from 'react';
 import { AvForm, AvField} from 'availity-reactstrap-validation';
 import { Button, FormGroup, Label, Input, Collapse, Alert, CustomInput } from 'reactstrap';
 import axios from 'axios';
+import {ToastContainer, ToastStore} from 'react-toasts';
+
 
 export default class Example extends React.Component {
   constructor(props) {
@@ -99,7 +101,7 @@ export default class Example extends React.Component {
     formData.append('name', data.name);
     formData.append("email", data.email);
     formData.append("destination", data.destination);
-    formData.append("subscribers", '');
+    formData.append("subscribers", '0');
     formData.append("duration", data.duration);
     formData.append("total-participation", data["total-participation"]);
     formData.append("price", data.price);
@@ -121,6 +123,13 @@ export default class Example extends React.Component {
     
 
     axios.post('/api/items', formData)
+    .then(function (response) {
+      if(response.status === 200) {
+        ToastStore.success("Trip saved!");
+      } else {
+        ToastStore.error("Trip saved!");
+      }
+    })
   }
 
   saveTrip = () => {
@@ -197,8 +206,8 @@ export default class Example extends React.Component {
 
       <Alert color="dark" onClick={this.toggleSaveTrip} style={{ marginTop: '25px'}}>Save trip</Alert>
       <Collapse isOpen={this.state.CollapseSaveTrip}>
-        {/* <Button disabled={!this.state.allGood} onClick={this.saveTrip} >Save trip</Button> */}
-        <Button  onClick={this.saveTrip} >Save trip</Button>
+        <Button disabled={!this.state.allGood} onClick={this.saveTrip} >Submit</Button>
+        <ToastContainer store={ToastStore}/>
       </Collapse>
 
       </div>
