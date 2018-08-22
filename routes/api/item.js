@@ -59,6 +59,7 @@ router.post('/', upload.single('fileBrowserImage'), (req, res) => {
         extras: req.body.extras,
         mustHave: req.body.mustHave,
         activities: req.body.activities,
+        shortDescription: req.body.shortDescription,
         fileBrowserImage: req.file.path
      });
      newItem.save().then(item => res.json(item));

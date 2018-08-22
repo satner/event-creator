@@ -105,6 +105,7 @@ export default class Example extends React.Component {
     formData.append("duration", data.duration);
     formData.append("total-participation", data["total-participation"]);
     formData.append("price", data.price);
+    formData.append('shortDescription', data.shortDescription);
     formData.append("date-start", data["date-start"]);
     formData.append("date-end", data["date-end"]);
     formData.append("contact-phone", data["contact-phone"]);
@@ -149,17 +150,18 @@ export default class Example extends React.Component {
             <div>
             <AvField name="name" label="Name" value={this.props.username} disabled/>
             <AvField name="email" label="Email" value={this.props.email} disabled />
-            <AvField name="destination" label="Destination"/>
-            <AvField name="duration" label="Duration" type="number" min="1" required placeholder="Enter duration of trip"/>
+            <AvField name="destination" label="Destination" required/>
+            <AvField name="duration" label="Duration" type="number" min="1" required/>
             <AvField name="total-participation" label="Total Participation" type="number" min="1" required />
             <AvField name="price" label="Price" type="number" min="1" required />
-            <AvField name="date-start" label="Date (Start)" type="date" required/>
+            <AvField name="shortDescription" label="Short Description" required/>
             <FormGroup encType="multipart/form-data">
               <Label for="fileBrowserImage">Trip image</Label>
               <CustomInput encType="multipart/form-data" type="file" id="fileBrowser" name="fileBrowserImage" onChange={e => this.setState({selectedFile: e.target.files[0]})}/>
             </FormGroup>
             </div>
             <div style={{alignSelf: "flex-end"}}>
+            <AvField name="date-start" label="Date (Start)" type="date" required/>
             <AvField name="date-end" label="Date (End)" type="date" required/>
             <AvField name="contact-phone" label="Phone" type="tel" required/>
             <AvField name="hotel" label="Hotel Name" required />

@@ -58,8 +58,12 @@ class DisplayData extends Component {
           />
         </div>
 
-          { showingContacts.map(data => <CustomCard key={data._id} name={data.name} />) }
-
+          { showingContacts.map(data => <CustomCard key={data._id} 
+                                                    name={data.name} 
+                                                    avatar={data.fileBrowserImage} 
+                                                    destination={data.destination} 
+                                                    shortDescription={data.shortDescription}
+                                                    description={data.description}/>) }
           <div className="w-100 px-4 py-5 d-flex flex-row flex-wrap align-items-center justify-content-between">
             <div className="d-flex flex-row align-items-center">
                 <h2 className={headerClass}>
