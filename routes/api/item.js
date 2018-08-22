@@ -44,8 +44,10 @@ router.get('/', (req, res) => {
 // @desc Create an item
 router.post('/', upload.single('fileBrowserImage'), (req, res) => {
     const newItem = new Item({
-         name: req.body.name,
+        name: req.body.name,
         email: req.body.email,
+        destination: req.body.destination,
+        subscribers: req.body.subscribers,
         duration: req.body.duration,
         "total-participation": req.body["total-participation"],
         price: req.body.price,

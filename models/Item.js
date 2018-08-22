@@ -11,6 +11,9 @@ const ItemSchema = new Schema({
         type: String,
         
     },
+    destination: {
+        type: String
+    },
     duration: {
         type: String,
        
@@ -56,6 +59,9 @@ const ItemSchema = new Schema({
        
     },
     fileBrowserImage: {
+        type: String
+    },
+    subscribers: {
         type: String
     },
     date: {

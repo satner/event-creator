@@ -98,6 +98,8 @@ export default class Example extends React.Component {
 
     formData.append('name', data.name);
     formData.append("email", data.email);
+    formData.append("destination", data.destination);
+    formData.append("subscribers", '');
     formData.append("duration", data.duration);
     formData.append("total-participation", data["total-participation"]);
     formData.append("price", data.price);
@@ -138,6 +140,7 @@ export default class Example extends React.Component {
             <div>
             <AvField name="name" label="Name" value={this.props.username} disabled/>
             <AvField name="email" label="Email" value={this.props.email} disabled />
+            <AvField name="destination" label="Destination"/>
             <AvField name="duration" label="Duration" type="number" min="1" required placeholder="Enter duration of trip"/>
             <AvField name="total-participation" label="Total Participation" type="number" min="1" required />
             <AvField name="price" label="Price" type="number" min="1" required />
@@ -147,7 +150,7 @@ export default class Example extends React.Component {
               <CustomInput encType="multipart/form-data" type="file" id="fileBrowser" name="fileBrowserImage" onChange={e => this.setState({selectedFile: e.target.files[0]})}/>
             </FormGroup>
             </div>
-            <div >
+            <div style={{alignSelf: "flex-end"}}>
             <AvField name="date-end" label="Date (End)" type="date" required/>
             <AvField name="contact-phone" label="Phone" type="tel" required/>
             <AvField name="hotel" label="Hotel Name" required />
@@ -163,7 +166,7 @@ export default class Example extends React.Component {
               <Label for="exampleText">Must have</Label>
               <Input type="textarea" name="must-have" id="exampleText" onKeyUp={(e) => this.setState({mustHave: e.target.value})}/>
             </FormGroup>
-            <FormGroup>
+            <FormGroup >
               <Button>Next</Button>
             </FormGroup>
             </div>
