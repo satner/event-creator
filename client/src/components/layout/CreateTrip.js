@@ -1,6 +1,7 @@
 import React from 'react';
 import { AvForm, AvField} from 'availity-reactstrap-validation';
-import { Button, FormGroup, Label, Input, Collapse, Alert } from 'reactstrap';
+import { Button, FormGroup, Label, Input, Collapse, Alert, CustomInput } from 'reactstrap';
+import axios from 'axios';
 
 export default class Example extends React.Component {
   constructor(props) {
@@ -21,7 +22,8 @@ export default class Example extends React.Component {
       extras: '',
       mustHave:'',
       mainGood: false,
-      allGood: false
+      allGood: false, 
+      selectedFile: ''
       };
   }
 
@@ -82,19 +84,46 @@ export default class Example extends React.Component {
   }
 
   kappa = (data) => {
-    fetch('/api/items', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: data
-    })
+    // fetch('/api/items', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: data
+    // })
+
+    let formData = new FormData();
+
+
+    formData.append('name', data.name);
+    formData.append("email", data.email);
+    formData.append("duration", data.duration);
+    formData.append("total-participation", data["total-participation"]);
+    formData.append("price", data.price);
+    formData.append("date-start", data["date-start"]);
+    formData.append("date-end", data["date-end"]);
+    formData.append("contact-phone", data["contact-phone"]);
+    formData.append("hotel", data.hotel);
+    formData.append("description", data.description);
+    formData.append("extras", data.extras);
+    formData.append("mustHave", data.mustHave);
+    formData.append("activities", JSON.stringify(data.activities));
+    formData.append('fileBrowserImage', this.state.selectedFile);
+
+    // fetch('/api/items', {
+    //   method:'POST',
+    //   body: formData
+
+    // })
+    
+
+    axios.post('/api/items', formData)
   }
 
   saveTrip = () => {
     this.state.values.activities = this.state.scheduleTable
-    this.kappa(JSON.stringify(this.state.values))
+    this.kappa(this.state.values)
   }
 
   render() {
@@ -113,6 +142,10 @@ export default class Example extends React.Component {
             <AvField name="total-participation" label="Total Participation" type="number" min="1" required />
             <AvField name="price" label="Price" type="number" min="1" required />
             <AvField name="date-start" label="Date (Start)" type="date" required/>
+            <FormGroup encType="multipart/form-data">
+              <Label for="fileBrowserImage">Trip image</Label>
+              <CustomInput encType="multipart/form-data" type="file" id="fileBrowser" name="fileBrowserImage" onChange={e => this.setState({selectedFile: e.target.files[0]})}/>
+            </FormGroup>
             </div>
             <div >
             <AvField name="date-end" label="Date (End)" type="date" required/>
@@ -147,7 +180,7 @@ export default class Example extends React.Component {
             this.createSchedule(this.state.values.duration)
           }
             <FormGroup style={{alignSelf: "flex-end"}}>
-                <Button>Save</Button>
+                <Button>Next</Button>
             </FormGroup>
           </AvForm>
         </Collapse>
@@ -161,7 +194,8 @@ export default class Example extends React.Component {
 
       <Alert color="dark" onClick={this.toggleSaveTrip} style={{ marginTop: '25px'}}>Save trip</Alert>
       <Collapse isOpen={this.state.CollapseSaveTrip}>
-        <Button disabled={!this.state.allGood} onClick={this.saveTrip} >Save trip</Button>
+        {/* <Button disabled={!this.state.allGood} onClick={this.saveTrip} >Save trip</Button> */}
+        <Button  onClick={this.saveTrip} >Save trip</Button>
       </Collapse>
 
       </div>

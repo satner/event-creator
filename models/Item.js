@@ -55,6 +55,9 @@ const ItemSchema = new Schema({
         type: Array,
        
     },
+    fileBrowserImage: {
+        type: String
+    },
     date: {
         type: Date,
         default: Date.now
