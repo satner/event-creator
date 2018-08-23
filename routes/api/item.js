@@ -70,6 +70,7 @@ router.post('/', upload.single('fileBrowserImage'), (req, res) => {
         fileBrowserImage: req.file.path
      });
      newItem.save().then(item => res.json(item));
+     
     if (!req.file) {
         console.log("No file received");
       } else {

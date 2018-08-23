@@ -7,7 +7,6 @@ import TripDetails from '../pages/TripDetails'
 class CustomCard extends React.Component  {
   
   render() {
-    {console.log(this.props.id)}
     return (
       <div className="d-flex p-2">
         <Card style={{ width: "350px" }}>

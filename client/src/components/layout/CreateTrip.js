@@ -85,7 +85,6 @@ export default class Example extends React.Component {
   }
 
   kappa = (data) => {
-    console.log(data)
     let formData = new FormData();
     formData.append('name', (data.name));
     formData.append("email", data.email);
@@ -116,7 +115,7 @@ export default class Example extends React.Component {
   }
 
   saveTrip = () => {
-    console.log(this.state.schedule)
+    this.setState({allGood: false})
     this.state.values.activities = this.state.schedule
     this.kappa(this.state.values)
   }

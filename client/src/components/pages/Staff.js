@@ -61,7 +61,7 @@ class Staff extends Component {
             <CreateTrip username={currentUserName} email={currentUserEmail}/>
           </TabPane>
           <TabPane tabId="2">
-            <TripsTable username={currentUserName} email={currentUserEmail}/>
+            <TripsTable username={currentUserName} email={currentUserEmail} cb={this.toggle}/>
           </TabPane>
         </TabContent>
       </div>

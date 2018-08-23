@@ -16,9 +16,12 @@ class TripDetails extends Component {
   }
 
   testing = () => {
-    
-   
-     console.log(this.state.tripData)   
+    let kappa
+    if (this.state.tripData.activities) {
+      kappa = JSON.parse(this.state.tripData.activities)
+      console.log(kappa["main-activity-1-day-1"])
+    }
+     
     
 
     
