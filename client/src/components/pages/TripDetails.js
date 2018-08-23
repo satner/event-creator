@@ -1,35 +1,51 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, ListGroup, ListGroupItem, Badge } from 'reactstrap';
 import { Button  } from 'reactstrap';
 import JustTrip from '../layout/JustTrip'
 import '../../TripDeatails.css'
 
 class TripDetails extends Component {
   state ={
-    tripData: []
+    tripData: [],
+    days: 0
   }
 
   componentDidMount() {
     fetch('/api/items/' + this.props.location.state.id)
       .then(res => res.json())
       .then(data => this.setState({ tripData: data }, () => console.log('Specific data fetched...')))
+
   }
 
-  testing = () => {
-    let kappa
-    if (this.state.tripData.activities) {
-      kappa = JSON.parse(this.state.tripData.activities)
-      console.log(kappa["main-activity-1-day-1"])
+  createSchedule = (days) => {
+    // let table = []
+    // for(let i = 0; i < days; i++) {
+    //   table.push(
+    //     <div key={i} >
+    //       <JustTrip day={i + 1} activities={this.state.tripData.activities}/>
+    //     </div>
+    //   )
+    // }
+    // return table
+    let table = []
+    if(this.state.tripData.activities) {
+      let p = JSON.parse(this.state.tripData.activities)
+      let act = Object.values(p)
+      for(let i = 0 ; i < act.length / 5; i++) {
+        table.push(
+          <div key={i} >
+            <JustTrip day={i + 1} main={act[i]} ex1={act[i+1]} exc1={act[i+2]} ex2={act[i+3]} exc2={act[i+4]}/>
+          </div>
+        )
+      }    
     }
-     
-    
-
-    
+    return table
   }
+
   render() {
     const {tripData} = this. state;
     const days = tripData.duration;
-    
+
     return (
         <Container>
           {/* Header and subHeader of trip */}
@@ -51,7 +67,7 @@ class TripDetails extends Component {
           </Col>
           <Col className="main-trip-info-col text-center">
             <h4><small className="text-muted">PRICE</small></h4>
-            <p className="main-trip-info-data">{tripData["price"]}</p>
+            <p className="main-trip-info-data">{tripData["price"]} &euro;</p>
           </Col>
           <Col className="main-trip-info-col text-center">
             <h4><small className="text-muted">AVAILABILITY</small></h4>
@@ -74,8 +90,39 @@ class TripDetails extends Component {
 
         {/* Schedule */}
         <h3><small className="text-muted">Schedule</small></h3>
-        {this.testing() }
-       
+        {this.createSchedule(days)}
+
+        {/* Must have */}
+        <Row>
+          <Col style={{marginTop: "25px"}}>
+            <h3><small className="text-muted">Must have</small></h3>
+            {tripData["mustHave"]}
+            <hr />
+          </Col>
+        </Row>
+
+        {/* Extras */}
+        <Row>
+          <Col style={{marginTop: "25px"}}>
+            <h3><small className="text-muted">Extras</small></h3>
+            {tripData["extras"]}
+            <hr />
+          </Col>
+        </Row>
+
+        {/* Notes */}
+        <Row>
+          <Col style={{marginTop: "25px"}}>
+            <h3><small className="text-muted">Notes</small></h3>
+            <ListGroup>
+              <ListGroupItem className="justify-content-between"><Badge color="info" style={{marginRight: "10px"}}>Hotel</Badge> {tripData.hotel}</ListGroupItem>
+              <ListGroupItem className="justify-content-between"><Badge color="info" style={{marginRight: "10px"}}>Email</Badge>  {tripData.email}</ListGroupItem>
+              <ListGroupItem className="justify-content-between"><Badge color="info" style={{marginRight: "10px"}}>Contact phone</Badge>+30 {tripData["contact-phone"]}</ListGroupItem>
+              <ListGroupItem className="justify-content-between"><Badge color="info" style={{marginRight: "10px"}}>Travel agent</Badge>  {tripData.name}</ListGroupItem>
+            </ListGroup>
+          </Col>
+        </Row>
+
       </Container>
     )
   }

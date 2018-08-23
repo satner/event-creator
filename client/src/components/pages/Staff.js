@@ -31,6 +31,10 @@ class Staff extends Component {
     }
   }
 
+  updateKappa = () => {
+    this.setState({kappa: true})
+  }
+
   render() {
     const { currentUserEmail, currentUserName } = this.state;
 
@@ -61,7 +65,7 @@ class Staff extends Component {
             <CreateTrip username={currentUserName} email={currentUserEmail}/>
           </TabPane>
           <TabPane tabId="2">
-            <TripsTable username={currentUserName} email={currentUserEmail} cb={this.toggle}/>
+            <TripsTable username={currentUserName} email={currentUserEmail} cb={this.updateKappa}/>
           </TabPane>
         </TabContent>
       </div>

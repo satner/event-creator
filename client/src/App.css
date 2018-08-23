@@ -336,3 +336,9 @@ outline: none;
 	margin-left: 10px;
 	text-emphasis: strong;
 }
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Collapse, Button, CardBody, Card, Alert } from 'reactstrap';
-
+import { Collapse, CardBody, CardText, Card, Alert, ListGroup, ListGroupItem, Badge, Table } from 'reactstrap';
+import '../../JustTrip.css'
 
 class JustTrip extends Component {
     constructor(props) {
@@ -14,18 +14,37 @@ class JustTrip extends Component {
       }
     
       render() {
+        
         return (
           <div>
-            <Alert color="dark" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Day </Alert>
+            <Alert color="dark" onClick={this.toggle} style={{ marginBottom: '1rem', cursor: "pointer" }}>Day {this.props.day}</Alert>
             <Collapse isOpen={this.state.collapse}>
-              <Card>
-                <CardBody>
-                Anim pariatur cliche reprehenderit,
-                 enim eiusmod high life accusamus terry richardson ad squid. Nihil
-                 anim keffiyeh helvetica, craft beer labore wes anderson cred
-                 nesciunt sapiente ea proident.
-                </CardBody>
-              </Card>
+              <Table>
+                <thead>
+                  <tr>
+                    <th>Activities</th>
+                    <th>Type of activity</th>
+                    <th>Minimum participation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="activity">{this.props.main}</td>
+                    <td>Compulsory</td>
+                    <td>-</td>
+                  </tr>
+                  <tr>
+                    <td className="activity">{this.props.ex1}</td>
+                    <td>Optional</td>
+                    <td>{this.props.exc1} people</td>
+                  </tr>
+                  <tr>
+                    <td className="activity">{this.props.ex2}</td>
+                    <td>Optional</td>
+                    <td>{this.props.exc2} people</td>
+                  </tr>
+                </tbody>
+              </Table>
             </Collapse>
           </div>
         );

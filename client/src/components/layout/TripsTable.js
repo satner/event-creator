@@ -63,13 +63,19 @@ class App extends Component {
         .then((response) => {
             if(response.status === 200) {
                 ToastStore.success("Trip deleted!");
+                this.updateASAP()
               } else {
                 ToastStore.error("Error occurred");
               }
+        }).catch(e => {
+          ToastStore.error("Error occurred");
         })
     }
   };
 
+  updateASAP = () => {
+    this.props.cb()
+  }
 
   render() {
     // let products = this.state.allData.filter( item => item.name === this.props.username)
