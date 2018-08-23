@@ -1,0 +1,35 @@
+#trip-header {
+    text-align: center;
+    margin-top: 10px;
+    text-transform: capitalize
+}
+
+#trip-subheader {
+    text-align: center;
+    text-transform: capitalize;
+    margin-bottom: 15px;
+}
+
+.vdivide :not(:last-child):after {
+    background: #e0e0e0;
+    width: 1px;
+    content: "";
+    display:block;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    right: 0;
+    min-height: 40px;
+  }
+
+.main-trip-info-col  {
+    min-height: 40px;
+    vertical-align: middle;
+}
+
+.main-trip-info-data {
+    margin-top: 16px;
+}
+.button-wrapper {
+    text-align: end
+  }

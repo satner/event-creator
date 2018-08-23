@@ -53,7 +53,7 @@ const ItemSchema = new Schema({
         type: String
     },
     activities: {
-        type: Array,
+        type: Object,
         required: true
     },
     fileBrowserImage: {

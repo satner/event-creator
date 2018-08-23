@@ -41,6 +41,7 @@ class Staff extends Component {
             <NavLink
               className={classnames({ active: this.state.activeTab === '1' })}
               onClick={() => { this.toggle('1'); }}
+              style={{cursor: "pointer"}}
             >
               Create a trip
             </NavLink>
@@ -49,6 +50,7 @@ class Staff extends Component {
             <NavLink
               className={classnames({ active: this.state.activeTab === '2' })}
               onClick={() => { this.toggle('2'); }}
+              style={{cursor: "pointer"}}
             >
               My trips
             </NavLink>
@@ -59,7 +61,7 @@ class Staff extends Component {
             <CreateTrip username={currentUserName} email={currentUserEmail}/>
           </TabPane>
           <TabPane tabId="2">
-          <TripsTable username={currentUserName} email={currentUserEmail}/>
+            <TripsTable username={currentUserName} email={currentUserEmail}/>
           </TabPane>
         </TabContent>
       </div>

@@ -8,7 +8,6 @@ import {ToastContainer, ToastStore} from 'react-toasts';
 export default class Example extends React.Component {
   constructor(props) {
     super(props);
-
     this.handleSubmitSchedule = this.handleSubmitSchedule.bind(this);
     this.toggleSaveTrip = this.toggleSaveTrip.bind(this);
     this.toggleSchedule = this.toggleSchedule.bind(this);
@@ -86,19 +85,9 @@ export default class Example extends React.Component {
   }
 
   kappa = (data) => {
-    // fetch('/api/items', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: data
-    // })
-
+    console.log(data)
     let formData = new FormData();
-
-
-    formData.append('name', data.name);
+    formData.append('name', (data.name));
     formData.append("email", data.email);
     formData.append("destination", data.destination);
     formData.append("subscribers", '0');
@@ -116,13 +105,6 @@ export default class Example extends React.Component {
     formData.append("activities", JSON.stringify(data.activities));
     formData.append('fileBrowserImage', this.state.selectedFile);
 
-    // fetch('/api/items', {
-    //   method:'POST',
-    //   body: formData
-
-    // })
-    
-
     axios.post('/api/items', formData)
     .then(function (response) {
       if(response.status === 200) {
@@ -134,7 +116,8 @@ export default class Example extends React.Component {
   }
 
   saveTrip = () => {
-    this.state.values.activities = this.state.scheduleTable
+    console.log(this.state.schedule)
+    this.state.values.activities = this.state.schedule
     this.kappa(this.state.values)
   }
 
@@ -142,7 +125,7 @@ export default class Example extends React.Component {
     return (
       <div>
         
-        <Alert color="dark" onClick={this.toggleMain} style={{ marginTop: '25px'}}>Main content of trip</Alert>
+        <Alert color="dark" onClick={this.toggleMain} style={{ marginTop: '25px', cursor: "pointer"}}>Main content of trip</Alert>
 
         {/* Create Main content of trip */}
         <Collapse isOpen={this.state.collapseMain}>
@@ -185,9 +168,8 @@ export default class Example extends React.Component {
           </AvForm>
         </Collapse>
 
-
         {/* Create Schedule of trip */}
-        <Alert color="dark" onClick={this.toggleSchedule} style={{ marginTop: '25px'}}>Schedule</Alert>
+        <Alert color="dark" onClick={this.toggleSchedule} style={{ marginTop: '25px', cursor: "pointer"}}>Schedule</Alert>
         <Collapse isOpen={this.state.collapseSchedule}>
           <AvForm onSubmit={this.handleSubmitSchedule} style={{marginTop: "25px", display: "flex", flexWrap: "wrap", justifyContent: "flex-start"}}>
           {this.state.values && this.state.values.duration &&
@@ -198,15 +180,8 @@ export default class Example extends React.Component {
             </FormGroup>
           </AvForm>
         </Collapse>
-            
-        
-        {/* {this.state.values && <div>
-          <h5>Submission values</h5>
-          Invalid: {this.state.errors.join(', ')}<br />
-          Values: <pre>{JSON.stringify(this.state.values, null, 2)}</pre>
-        </div>} */}
 
-      <Alert color="dark" onClick={this.toggleSaveTrip} style={{ marginTop: '25px'}}>Save trip</Alert>
+      <Alert color="dark" onClick={this.toggleSaveTrip} style={{ marginTop: '25px', cursor: "pointer"}}>Save trip</Alert>
       <Collapse isOpen={this.state.CollapseSaveTrip}>
         <Button disabled={!this.state.allGood} onClick={this.saveTrip} >Submit</Button>
         <ToastContainer store={ToastStore}/>

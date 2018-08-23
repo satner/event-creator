@@ -3,6 +3,7 @@ import Pagination from './Pagination'
 import CustomCard from './CustomCard'
 import escapeRegExp from 'escape-string-regexp'
 
+
 class DisplayData extends Component {
   state = { allData: [], currentData: [], currentPage: null, totalPages: null, query: '' }
 
@@ -63,7 +64,8 @@ class DisplayData extends Component {
                                                     avatar={data.fileBrowserImage} 
                                                     destination={data.destination} 
                                                     shortDescription={data.shortDescription}
-                                                    description={data.description}/>) }
+                                                    description={data.description}
+                                                    id={data._id}/>)}
           <div className="w-100 px-4 py-5 d-flex flex-row flex-wrap align-items-center justify-content-between">
             <div className="d-flex flex-row align-items-center">
                 <h2 className={headerClass}>

@@ -9,16 +9,18 @@ const items = [
   {
     src: imageOne,
     altText: 'Dalmatia',
-    // caption: 'Slide 1',
+    caption: '',
     // header: 'Slide 1 Header'
   },
   {
     src: imageTwo,
     altText: 'Rome',
+    caption: '',
   },
   {
     src: imageThree,
     altText: 'Meteora',
+    caption: '',
   }
 ];
 

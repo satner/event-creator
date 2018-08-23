@@ -6,6 +6,8 @@ import Navbar from './components/layout/Navbar';
 import Home from './components/pages/Home';
 import Staff from './components/pages/Staff';
 import Login from './components/auth/Login';
+import TripDetails from './components/pages/TripDetails';
+import Footer from './components/layout/Footer';
 
 import './App.css';
 
@@ -34,7 +36,9 @@ class App extends Component {
                   <Login baseUrl="https://dev-116156.oktapreview.com" />
                 )}
               />
+              <Route path="/TripDetails" exact component={TripDetails}/>
               <Route path="/implicit/callback" component={ImplicitCallback} />
+              <Footer />
             </div>
           </div>
         </Security>

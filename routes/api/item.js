@@ -40,6 +40,13 @@ router.get('/', (req, res) => {
         .then(items => res.json(items))
 });
 
+// @route GET api/items/:id
+// @desc Get specific id item
+router.get('/:id', (req, res) => {
+    Item.findOne({_id: req.params.id}).then(item => res.json(item));
+
+});
+
 // @route POST api/items
 // @desc Create an item
 router.post('/', upload.single('fileBrowserImage'), (req, res) => {
