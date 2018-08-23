@@ -21,6 +21,7 @@ class Staff extends Component {
       currentUserEmail: idToken.idToken.claims.email,
       currentUserName: idToken.idToken.claims.name
     });
+    window.scrollTo(0,0)
   }
 
   toggle(tab) {

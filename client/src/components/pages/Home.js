@@ -4,9 +4,11 @@ import DisplayData from '../layout/DisplayData';
 import ScrollUpButton from "react-scroll-up-button";
 
 class Home extends Component {
- 
+  componentDidUpdate() {
+    window.scrollTo(0,0);
+  }
   render() {
-
+    
     return (
       <div >
          <ScrollUpButton EasingType='linear'/>

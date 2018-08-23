@@ -14,7 +14,7 @@ class TripDetails extends Component {
     fetch('/api/items/' + this.props.location.state.id)
       .then(res => res.json())
       .then(data => this.setState({ tripData: data }, () => console.log('Specific data fetched...')))
-
+      window.scrollTo(0,0)
   }
 
   createSchedule = (days) => {
