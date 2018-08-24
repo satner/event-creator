@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Steps, { Step } from 'rc-steps';
+import { AvForm, AvField, AvRadioGroup, AvRadio } from 'availity-reactstrap-validation';
+import { Button, FormGroup, Badge, Jumbotron } from 'reactstrap';
 import 'rc-steps/assets/index.css';
 import 'rc-steps/assets/iconfont.css';
-import { AvForm, AvField, AvGroup, AvInput, AvFeedback, AvRadioGroup, AvRadio } from 'availity-reactstrap-validation';
-import { Button, Label, FormGroup, Badge } from 'reactstrap';
 
+import CreditCard from '../layout/Book/CreditCard'
 
 class App extends Component {
   state = {
@@ -34,8 +35,21 @@ class App extends Component {
     });
   }
 
-  handleSubmit(event, errors, values) {
-    this.setState({errors, values});
+  handleSubmitTravellerInfos = (event, errors, values) => {
+    this.setState({travellerInfos: values});
+    if(errors.length === 0) {
+      let s = this.state.currentStep + 1;
+      if (s >= this.state.totalSteps) {
+        s = 5;
+      }
+      this.setState({
+        currentStep: s,
+      });
+    }
+  }
+
+  handleSubmitTravellerChoices = (event, errors, values) => {
+    this.setState({travellerInfos: values});
     if(errors.length === 0) {
       let s = this.state.currentStep + 1;
       if (s >= this.state.totalSteps) {
@@ -88,40 +102,48 @@ class App extends Component {
         <Step title="Traveler Information" />
         <Step title="Schedule" />
         <Step title="Payment" />
-        <Step title="待运行" />
+        <Step title="Complete" />
         </Steps>
 
         { this.state.currentStep === 1 &&
-            <AvForm onSubmit={this.handleSubmit.bind(this)} style={{width: "50%", marginTop: "25px"}}>
-              {/* Traveller name */}
-              <AvField name="name" label="Name" required />
-              {/* Date of birth */}
-              <AvField name="dateOfBirth" label="Date of birth" type="date" required/>
-              {/* Passport number */}
-              <AvField name="passportNumber" label="Passport number" type="text" validate={{pattern: {value: /[a-zA-Z]{2}\d{7}/}}} required/>       
-              {/* Passport expiry date */}
-              <AvField name="passportExpiryDate" label="Passport expiry date" type="date" required/>
-              {/* Contact phone */}
-              <AvField name="contactPhone" label="Contact phone" type="text" validate={{pattern: {value: /\d{10}/}}} required/>
-              <FormGroup>
-                <Button>Next</Button>
-              </FormGroup>
-            </AvForm>
+            <Jumbotron>
+              <AvForm onSubmit={this.handleSubmitTravellerInfos} style={{ marginTop: "25px"}}>
+                {/* Traveller name */}
+                <AvField name="name" label="Name" required />
+                {/* Date of birth */}
+                <AvField name="dateOfBirth" label="Date of birth" type="date" required/>
+                {/* Passport number */}
+                <AvField name="passportNumber" label="Passport number" type="text" validate={{pattern: {value: /[a-zA-Z]{2}\d{7}/}}} required/>       
+                {/* Passport expiry date */}
+                <AvField name="passportExpiryDate" label="Passport expiry date" type="date" required/>
+                {/* Contact phone */}
+                <AvField name="contactPhone" label="Contact phone" type="text" validate={{pattern: {value: /\d{10}/}}} required/>
+                <FormGroup>
+                  <Button>Next</Button>
+                </FormGroup>
+              </AvForm>
+            </Jumbotron>
           }
 
           { this.state.currentStep === 2 &&
-            <AvForm onSubmit={this.handleSubmit.bind(this)} style={{width: "50%", marginTop: "25px"}}>
-              {this.createSheduleExtras(days, activities)}
-              <FormGroup>
-                <Button>Next</Button>
-              </FormGroup>
-            </AvForm>
+            <Jumbotron>
+              <AvForm onSubmit={this.handleSubmitTravellerChoices} style={{marginTop: "25px"}}>
+                {this.createSheduleExtras(days, activities)}
+                <FormGroup>
+                  <Button>Next</Button>
+                </FormGroup>
+              </AvForm>
+            </Jumbotron>
           }
 
-          {this.state.values && <div>
+          { this.state.currentStep === 3 && 
+            <CreditCard />
+
+          }
+
+          {this.state.travellerInfos && <div>
           <h5>Submission values</h5>
-          Invalid: {this.state.errors.join(', ')}<br />
-          Values: <pre>{JSON.stringify(this.state.values, null, 2)}</pre>
+          Values: <pre>{JSON.stringify(this.state.travellerInfos, null, 2)}</pre>
         </div>}
         
         {/* <Button style={{float: "left"}} onClick={this.prevStep}>Back</Button>
