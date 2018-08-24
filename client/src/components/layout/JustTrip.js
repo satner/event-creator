@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Collapse, CardBody, CardText, Card, Alert, ListGroup, ListGroupItem, Badge, Table } from 'reactstrap';
+import { Collapse, Alert, Table } from 'reactstrap';
 import '../../JustTrip.css'
 
 class JustTrip extends Component {

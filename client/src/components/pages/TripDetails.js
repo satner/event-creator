@@ -35,7 +35,7 @@ class TripDetails extends Component {
   }
 
   render() {
-    const {tripData} = this. state;
+    const {tripData} = this.state;
     const days = tripData.duration;
 
     return (

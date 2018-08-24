@@ -357,8 +357,12 @@ outline: none;
 
 .fWTXFL {
 	display: block !important;
+	max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #credit-card-pay-btn{
 	margin-top: 15px;
+	float: right;
 }
