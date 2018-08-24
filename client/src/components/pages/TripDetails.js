@@ -24,11 +24,20 @@ class TripDetails extends Component {
       let p = JSON.parse(this.state.tripData.activities)
       let act = Object.values(p)
       for(let i = 0 ; i < act.length / 5; i++) {
-        table.push(
-          <div key={i} >
-            <JustTrip day={i + 1} main={act[i]} ex1={act[i+1]} exc1={act[i+2]} ex2={act[i+3]} exc2={act[i+4]}/>
-          </div>
-        )
+        if (i > 0) {
+          let newAct = act.slice(i+4, i+9)
+          table.push(
+            <div key={i} >
+              <JustTrip day={i + 1} main={newAct[0]} ex1={newAct[1]} exc1={newAct[2]} ex2={newAct[3]} exc2={newAct[4]}/>
+            </div>
+          )
+        } else {
+          table.push(
+            <div key={i} >
+              <JustTrip day={i + 1} main={act[i]} ex1={act[i+1]} exc1={act[i+2]} ex2={act[i+3]} exc2={act[i+4]}/>
+            </div>
+          )
+        }
       }    
     }
     return table
