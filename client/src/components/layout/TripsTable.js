@@ -82,7 +82,7 @@ class App extends Component {
     return (
         <div>
         {/* <Alert style={{marginTop: "25px", width: "250px"}} color="dark">Click a line to delete it!</Alert> */}
-            <p id="table-title">Your Trips</p>
+            <p id="table-title"></p>
             <div className="container" >
                 <BootstrapTable 
                 striped

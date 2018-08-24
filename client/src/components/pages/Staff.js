@@ -10,7 +10,7 @@ class Staff extends Component {
    this.state = {
     currentUserName: '',
     currentUserEmail: '',
-    activeTab: '1'
+    activeTab: '2'
   }
   this.toggle = this.toggle.bind(this);
  }

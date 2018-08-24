@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, ListGroup, ListGroupItem, Badge } from 'reactstrap';
 import { Button  } from 'reactstrap';
+import { Link } from 'react-router-dom'
 import JustTrip from '../layout/JustTrip'
 import '../../TripDeatails.css'
 
@@ -18,15 +19,6 @@ class TripDetails extends Component {
   }
 
   createSchedule = (days) => {
-    // let table = []
-    // for(let i = 0; i < days; i++) {
-    //   table.push(
-    //     <div key={i} >
-    //       <JustTrip day={i + 1} activities={this.state.tripData.activities}/>
-    //     </div>
-    //   )
-    // }
-    // return table
     let table = []
     if(this.state.tripData.activities) {
       let p = JSON.parse(this.state.tripData.activities)
@@ -75,7 +67,8 @@ class TripDetails extends Component {
           </Col>
           <Col className="main-trip-info-col text-center">
             <div className='button-wrapper'>
-              <Button color="danger">BOOK</Button> 
+              
+              <Link to={{ pathname: '/book', state: { activities: this.state.tripData.activities, days: this.state.tripData.duration} }}><Button color="danger">BOOK</Button> </Link>
             </div>
           </Col>
         </Row>

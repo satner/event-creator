@@ -20,6 +20,7 @@
     "react-scripts": "1.1.4",
     "react-scroll-up-button": "^1.6.0",
     "react-stepper-horizontal": "^1.0.10",
+    "react-stepzilla": "^4.7.2",
     "react-toasts": "^2.0.13",
     "reactstrap": "^6.4.0"
   },

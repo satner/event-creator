@@ -7,6 +7,7 @@ import Home from './components/pages/Home';
 import Staff from './components/pages/Staff';
 import Login from './components/auth/Login';
 import TripDetails from './components/pages/TripDetails';
+import Book from './components/pages/Book'
 import Footer from './components/layout/Footer';
 
 import './App.css';
@@ -37,6 +38,7 @@ class App extends Component {
                 )}
               />
               <Route path="/TripDetails" exact component={TripDetails}/>
+              <Route path="/book" exact component={Book}/>
               <Route path="/implicit/callback" component={ImplicitCallback} />
               <Footer />
             </div>
