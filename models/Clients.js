@@ -30,6 +30,9 @@ const ClientSchema = new Schema({
     extras: {
         type: String,
         
+    }, 
+    tripID: {
+        type: String
     }
 });
 

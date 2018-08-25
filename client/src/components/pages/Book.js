@@ -70,7 +70,7 @@ class App extends Component {
         }
 
         { this.state.currentStep === 4 &&
-          <Complete name={this.state.travellerInfo.name} travellerInfo={JSON.stringify(this.state.travellerInfo)} travellerSchedule={JSON.stringify(this.state.travellerSchedule)}/>
+          <Complete name={this.state.travellerInfo.name} travellerInfo={JSON.stringify(this.state.travellerInfo)} travellerSchedule={JSON.stringify(this.state.travellerSchedule)} tripID={this.props.location.state.id}/>
         }
       
       </div>

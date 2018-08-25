@@ -19,7 +19,8 @@ router.post('/', (req, res) => {
         dateOfBirth: req.body.dateOfBirth,
         passportExpiryDate: req.body.passportExpiryDate,
         passportNumber: req.body.passportNumber,
-        extras: req.body.extras
+        extras: req.body.extras,
+        tripID : req.body.tripID
      });
      newClient.save().then(client => res.json(client));
 

@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { Jumbotron } from 'reactstrap';
-import AllGood from '../../../images/all-good.png'
-
 
 class Complete extends Component {
 
 componentDidMount() {
     let data = JSON.parse(this.props.travellerInfo)
     data.extras = this.props.travellerSchedule
+    data.tripID = this.props.tripID
 
     fetch('/api/client', {
         method: 'post',
@@ -33,7 +32,6 @@ componentDidMount() {
     )
   }
 }
-
 
 export default Complete;
 

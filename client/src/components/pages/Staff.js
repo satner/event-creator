@@ -3,6 +3,7 @@ import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 import classnames from 'classnames';
 import CreateTrip from '../layout/CreateTrip'
 import TripsTable from '../layout/TripsTable'
+import ClientTable from '../layout/ClientTable'
 
 class Staff extends Component {
  constructor(props) {
@@ -60,6 +61,15 @@ class Staff extends Component {
               My trips
             </NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink
+              className={classnames({ active: this.state.activeTab === '3' })}
+              onClick={() => { this.toggle('3'); }}
+              style={{cursor: "pointer"}}
+            >
+              My clients
+            </NavLink>
+          </NavItem>
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
@@ -67,6 +77,9 @@ class Staff extends Component {
           </TabPane>
           <TabPane tabId="2">
             <TripsTable username={currentUserName} email={currentUserEmail} cb={this.updateKappa}/>
+          </TabPane>
+          <TabPane tabId="3">
+            <ClientTable username={currentUserName} email={currentUserEmail} cb={this.updateKappa}/>
           </TabPane>
         </TabContent>
       </div>

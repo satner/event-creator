@@ -77,7 +77,7 @@ class TripDetails extends Component {
           <Col className="main-trip-info-col text-center">
             <div className='button-wrapper'>
               
-              <Link to={{ pathname: '/book', state: { activities: this.state.tripData.activities, days: this.state.tripData.duration} }}><Button color="danger">BOOK</Button> </Link>
+              <Link to={{ pathname: '/book', state: { activities: this.state.tripData.activities, days: this.state.tripData.duration, id: this.state.tripData._id} }}><Button color="danger">BOOK</Button> </Link>
             </div>
           </Col>
         </Row>
