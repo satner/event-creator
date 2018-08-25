@@ -2,7 +2,8 @@ import React from 'react';
 import { AvForm, AvField} from 'availity-reactstrap-validation';
 import { Button, FormGroup, Label, Input, Collapse, Alert, CustomInput } from 'reactstrap';
 import axios from 'axios';
-import {ToastContainer, ToastStore} from 'react-toasts';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 
 export default class Example extends React.Component {
@@ -105,14 +106,34 @@ export default class Example extends React.Component {
     formData.append('fileBrowserImage', this.state.selectedFile);
 
     axios.post('/api/items', formData)
-    .then(function (response) {
+    .then((response) => {
       if(response.status === 200) {
-        ToastStore.success("Trip saved!");
+        this.qwerty()
       } else {
-        ToastStore.error("Error occurred");
+        this.fail()
       }
+    }).catch(e => {
+      this.fail()
     })
   }
+
+  qwerty = () => toast.success('🦄 Trip saved!', {
+    position: "bottom-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+  });
+
+  fail = () => toast.error('🦄 Error occurred', {
+    position: "bottom-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true
+  });
 
   saveTrip = () => {
     this.setState({allGood: false})
@@ -183,9 +204,18 @@ export default class Example extends React.Component {
       <Alert color="dark" onClick={this.toggleSaveTrip} style={{ marginTop: '25px', cursor: "pointer"}}>Save trip</Alert>
       <Collapse isOpen={this.state.CollapseSaveTrip}>
         <Button disabled={!this.state.allGood} onClick={this.saveTrip} >Submit</Button>
-        <ToastContainer store={ToastStore}/>
       </Collapse>
-
+      <ToastContainer
+              position="bottom-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnVisibilityChange
+              draggable
+              pauseOnHover
+              />
       </div>
     );
   }

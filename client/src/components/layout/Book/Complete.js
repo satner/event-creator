@@ -7,7 +7,9 @@ componentDidMount() {
     let data = JSON.parse(this.props.travellerInfo)
     data.extras = this.props.travellerSchedule
     data.tripID = this.props.tripID
-
+    data.agent = this.props.agent
+    data.destination = this.props.dest
+    
     fetch('/api/client', {
         method: 'post',
         body: JSON.stringify(data),

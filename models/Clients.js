@@ -33,6 +33,12 @@ const ClientSchema = new Schema({
     }, 
     tripID: {
         type: String
+    },
+    agent: {
+        type: String
+    }, 
+    destination: {
+        type: String
     }
 });
 

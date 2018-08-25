@@ -3,9 +3,10 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import axios from 'axios';
-import { ToastStore} from 'react-toasts';
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 
 class App extends Component {
@@ -62,13 +63,12 @@ class App extends Component {
         axios.delete('/api/items/'+ row._id)
         .then((response) => {
             if(response.status === 200) {
-                ToastStore.success("Trip deleted!");
-                this.updateASAP()
-              } else {
-                ToastStore.error("Error occurred");
-              }
+              this.allGood()
+            } else {
+              this.allFail()
+            }
         }).catch(e => {
-          ToastStore.error("Error occurred");
+          this.allFail()
         })
     }
   };
@@ -77,17 +77,33 @@ class App extends Component {
     this.props.cb()
   }
 
+  allGood = () => toast.success('🦄 Trip deleted!', {
+    position: "bottom-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+  });
+
+  allFail = () => toast.error('🦄 Error occurred', {
+    position: "bottom-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true
+  });
+
   render() {
-    // let products = this.state.allData.filter( item => item.name === this.props.username)
     return (
         <div>
-        {/* <Alert style={{marginTop: "25px", width: "250px"}} color="dark">Click a line to delete it!</Alert> */}
             <p id="table-title"></p>
             <div className="container" >
                 <BootstrapTable 
                 striped
                 hover
-                keyField='id' 
+                keyField={(1 + Math.random() * (1000 - 1)).toString()}
                 data={ this.state.allData } 
                 defaultSorted={ this.state.defaultSorted } 
                 columns={ this.state.columns }
@@ -97,6 +113,17 @@ class App extends Component {
                 noDataIndication={ 'Add a trip!' }/>
             </div>  
             <sub style={{float: "right", marginTop: "25px", marginRight: "10px"}}>Click a line to delete it!</sub>
+            <ToastContainer
+              position="bottom-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnVisibilityChange
+              draggable
+              pauseOnHover
+              />
         </div>
     );
   }
