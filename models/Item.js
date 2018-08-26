@@ -20,7 +20,7 @@ const ItemSchema = new Schema({
         required: true 
     },
     "total-participation": {
-        type: String,
+        type: Number,
         required: true
     },
     price: {

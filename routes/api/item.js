@@ -90,4 +90,13 @@ router.delete('/:id', (req, res) => {
         }))
 });
 
+router.put('/:id', (req, res) => {
+    Item.findByIdAndUpdate(req.params.id, { $inc: { "total-participation": -1 }}, function(err, result){
+        if(err){
+            console.log(err);
+        }
+        res.send('Done')
+    } )
+})
+
 module.exports = router;

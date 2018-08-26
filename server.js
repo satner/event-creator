@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 
 const items = require('./routes/api/item');
 const client = require('./routes/api/client');
+const email = require('./routes/api/email');
 
 const app = express();
 
@@ -23,6 +24,7 @@ mongoose.connect(db)
 // Use routes
 app.use('/api/items', items);
 app.use('/api/client', client);
+app.use('/api/email', email);
 
 
 const port = process.env.PORT || 5000;
