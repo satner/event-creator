@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@okta/okta-react": "^1.0.3",
-    "@okta/okta-signin-widget": "^2.19.0",
+    "@okta/okta-signin-widget": "^3.0.0",
     "@types/payment": "^2.1.2",
     "availity-reactstrap-validation": "^2.0.6",
     "axios": "^0.18.0",
@@ -26,13 +26,17 @@
     "react-stepzilla": "^4.7.2",
     "react-toastify": "^4.2.0",
     "react-toasts": "^2.0.13",
-    "reactstrap": "^6.4.0"
+    "reactstrap": "^6.4.0",
+    "snyk": "^1.221.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000",
+  "snyk": true
 }
